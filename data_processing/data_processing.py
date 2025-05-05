@@ -1,4 +1,5 @@
 import csv
+import os
 
 class DataProcessing:
     global target
@@ -35,7 +36,6 @@ class DataProcessing:
     def get_processed_data(self):
         # get_data_trada
         print("Entrou dataP get_processed_data")
-        print(self.download_path)
         files = [self.target, self.neighborA, self.neighborB, self.neighborC]
         output_files = [
             f"{self.download_path}/target_clean.txt",
@@ -55,7 +55,7 @@ class DataProcessing:
 
         counter = 0
         common_target = common_neighborA = common_neighborB = common_neighborC = []
-
+    
         for path in files:
             temp_data = []
 
@@ -78,7 +78,6 @@ class DataProcessing:
                 buffer2 = []
                 buffer2.append(temp_data[i][0])
                 for j in selected_columns:
-                    print(j)
                     buffer2.append(temp_data[i][j])
 
                 buffer.append(buffer2)
