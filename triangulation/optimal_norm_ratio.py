@@ -8,7 +8,7 @@ def onr(self, focus):
         treatment = DataProcessing()
         data = treatment.load_data_file('Dados comum')
 
-        days, coef_a, coef_b, coef_c = self.generate_correlation_coef(focus)
+        days, coef_a, coef_b, coef_c = self.generate_correlation_coefficients(focus)
 
         if focus == 1:
             target_index = 6

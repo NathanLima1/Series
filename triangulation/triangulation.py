@@ -244,6 +244,8 @@ class Triangulation:
         values_station_C = []
 
         insufficient_days_indices = []
+        print("len", len(data[0]))
+        print(data)
 
         for i in range(len(data)):
             try:

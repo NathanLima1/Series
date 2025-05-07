@@ -422,29 +422,29 @@ class Principal(Frame):
 
         ind = self.paramt_tri.get()
         if ind == 'Precipitação':
-            foco = 1
+            focus = 1
             y_label = "Precipitação (mm)"
         elif ind == 'Temperatura máxima':
-            foco = 2
+            focus = 2
             y_label = "Temperatura(°C)"
         else:
-            foco = 3
+            focus = 3
             y_label = "Temperatura(°C)"
 
 
         metodo_list = ['Arithmetic Averange', 'Inverse Distance Weighted', 'Regional Weight', 'Optimized Normal Ratio']  
 
         if met == 'Arithmetic Averange':
-            trian.aa(foco)
-            eixo_x, eixo_y_tri, eixo_y_exato, media_ea, media_er, lixo = trian.get_aa()
+            trian.avg(focus)
+            eixo_x, eixo_y_tri, eixo_y_exato, media_ea, media_er, lixo = trian.get_avg()
         elif met == 'Inverse Distance Weighted':
-            trian.idw(foco)
+            trian.idw(focus)
             eixo_x, eixo_y_tri, eixo_y_exato, media_ea, media_er, lixo = trian.get_idw()
         elif met == 'Regional Weight':
-            trian.rw(foco)
+            trian.rw(focus)
             eixo_x, eixo_y_tri, eixo_y_exato, media_ea, media_er, lixo = trian.get_rw()
         else:
-            trian.onr(foco)
+            trian.onr(focus)
             eixo_x, eixo_y_tri, eixo_y_exato, media_ea, media_er, lixo = trian.get_onr()
 
         
@@ -520,7 +520,7 @@ class Principal(Frame):
 
     def histograma(self):
         t = DataProcessing()
-        dados = t.retorna_arq(self.data_hist.get())
+        data = t.load_data_file(self.data_hist.get())
         if self.paramt_hist.get() == "Precipitação":
             col = 3
         elif self.paramt_hist.get() == "Temperatura máxima":
@@ -528,7 +528,7 @@ class Principal(Frame):
         elif self.paramt_hist.get() == "Temperatura mínima":
             col = 5
 
-        mat = self.prepara_mat(dados, col)
+        mat = self.prepara_mat(data, col)
         
         saz = self.separa_estacao(mat,1)
         del saz[0]
@@ -651,7 +651,7 @@ class Principal(Frame):
 
     def boxplot_grafico(self):
         t = DataProcessing()
-        dados = t.retorna_arq(self.data_hist.get())
+        data = t.load_data_file(self.data_hist.get())
         if self.paramt_hist.get() == "Precipitação":
             col = 3
         elif self.paramt_hist.get() == "Temperatura máxima":
@@ -659,7 +659,7 @@ class Principal(Frame):
         elif self.paramt_hist.get() == "Temperatura mínima":
             col = 5
 
-        mat = self.prepara_mat(dados, col)
+        mat = self.prepara_mat(data, col)
         
         saz = self.separa_estacao(mat,1)
         del saz[0]

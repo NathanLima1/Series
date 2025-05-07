@@ -71,10 +71,10 @@ class DataProcessing:
             del temp_data[-1]      # remove last empty row
             del temp_data[:11]     # remove header rows
 
-            selected_columns = [col_prec, col_tmax, col_tmin]
+            selected_columns = [1, 2, 3]
             buffer = []
 
-            for i in range(len(temp_data)):
+            for i in range(len(temp_data)):  # percorre cada linha da tabela
                 buffer2 = []
                 buffer2.append(temp_data[i][0])
                 for j in selected_columns:
@@ -180,7 +180,6 @@ class DataProcessing:
     def common_data_2(self):
         # dadosc2
         target, t1 = self.prepare_common_data(str(self.download_path) + "/target_clean.txt")
-        print(target)
         neighA, t2 = self.prepare_common_data(str(self.download_path) + "/neighborA_clean.txt")
         neighB, t3 = self.prepare_common_data(str(self.download_path) + "/neighborB_clean.txt")
         neighC, t4 = self.prepare_common_data(str(self.download_path) + "/neighborC_clean.txt")
@@ -204,8 +203,8 @@ class DataProcessing:
                 idx4 = i
                 break
 
-        file_out = open(str(self.download) + '/common_data.csv', 'w')
-        file_buff = open(str(self.download) + '/buff.txt', 'w')
+        file_out = open(str(self.download_path) + '/common_data.csv', 'w')
+        file_buff = open(str(self.download_path) + '/buff.txt', 'w')
         common_count = 0
 
         for i in range(idx1, len(target)):
