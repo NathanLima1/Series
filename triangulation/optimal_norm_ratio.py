@@ -105,4 +105,4 @@ def onr(self, focus):
             ]
             self.meta_matrix_onr.append(row)
 
-        self.onr_erro_abs, self.onr_erro_rel = self.calcula_erros(self.onr_y, self.onr_alv_y)
+        self.onr_erro_abs, self.onr_erro_rel = self.calculate_errors(self.onr_y, self.onr_alv_y)

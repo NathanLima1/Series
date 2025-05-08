@@ -260,36 +260,44 @@ class DataProcessing:
     def load_data_file(self, option):
         # nova retorna_arq
         print("Entrou dataP load_data_file")
-        with open('end.txt') as file:
-            paths = [line.strip() for line in file]
+        arq = open('end.txt') 
+        a = arq.readlines()
+        arq.close()
+        if option == 'Cidade alvo':
+            di = a[0].replace("\n", '')
+        elif option == 'Vizinha A':
+            di = a[1].replace("\n", '')
+        elif option == 'Vizinha B':
+            di = a[2].replace("\n", '')
+        elif option == 'Vizinha C':
+            di = a[3].replace("\n", '')
+        elif option == 'Dados comum':
+            di = a[4].replace("\n", '')
+            
+        
 
-        options = {
-            'Target city': 0,
-            'Neighbor A': 1,
-            'Neighbor B': 2,
-            'Neighbor C': 3,
-            'Dados comum': 4
-        }
-
-        index = options.get(option)
-        if index is None or index >= len(paths):
-            raise ValueError(f"Invalid option or index out of range: '{option}'")
-
-        selected_path = paths[index]
-        data_list = []
-
-        with open(selected_path) as data_file:
-            for line in data_file:
-                line = line.strip().replace("'", "").replace(" ", "")
-                if option == 'Common Data':
-                    items = line.split(';')
-                    if items and items[-1] == '':
-                        items.pop()
-                else:
-                    items = line.split(',')
-                data_list.append(items)
-
-        return data_list
+        
+        lista = list()
+        
+        arq = open(di)
+        
+        for i in arq:
+            
+            i = i.replace('\n', '')
+            i = i.strip()
+            i = i.replace("'",'')
+            i = i.replace(" ",'')
+            
+            if option == 'Dados comum':
+                i = i.split(';')
+                del i[len(i)-1]
+                
+            else:
+                i = i.split(',')  
+            lista.append(i)
+        arq.close()
+        
+        return lista
 
     def get_year_range(self, option):
         # get_range

@@ -32,6 +32,7 @@ def idw(self, focus):
             data = data_process.load_data_file("Dados comum")
         
         cont2 = 1
+        
 
         self.meta_matrix_idw = []
         for i in range(len(data)):

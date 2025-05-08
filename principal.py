@@ -2,6 +2,7 @@ from data_processing.data_processing import DataProcessing
 from triangulation.triangulation import Triangulation
 from machine_learning.machine_learning import MachineLearning
 from meta_learning.meta_learning import MetaLearning
+from meta_learning.tests_generator import TestsGenerator
 from tkinter import Frame
 from tkinter import ttk
 from tkinter import Canvas, Label, StringVar, Button, CENTER, DISABLED
@@ -724,7 +725,7 @@ class Principal(Frame):
         window.mainloop()
 
     def open_meta(self):
-        window = MetaLearning()
+        window = TestsGenerator()
         window.mainloop()
 
     def __init__(self, *args, **kwargs):

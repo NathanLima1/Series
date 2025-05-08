@@ -2,6 +2,7 @@ from data_processing.data_processing import DataProcessing
 from training.training import Training
 from haversine import haversine, Unit
 import folium
+from folium.map import Popup
 import webbrowser
 import math
 from scipy import stats
@@ -121,11 +122,11 @@ class Triangulation:
         return self.avg_x, self.avg_y, self.avg_target_y, self.avg_abs_error, self.avg_rel_error, self.meta_matrix_avg
 
     def show_map(self):
-        m = folium.Map(location=self.tupla_tg)
-        folium.Marker(location=self.tupla_tg, popup=Popup('Target', show=True)).add_to(m)
-        folium.Marker(location=self.tupla_cA, popup=Popup('Neighbor A', show=True)).add_to(m)
-        folium.Marker(location=self.tupla_cB, popup=Popup('Neighbor B', show=True)).add_to(m)
-        folium.Marker(location=self.tupla_cC, popup=Popup('Neighbor C', show=True)).add_to(m)
+        m = folium.Map(location=self.tuple_target)
+        folium.Marker(location=self.tuple_target, popup=Popup('Target', show=True)).add_to(m)
+        folium.Marker(location=self.tuple_cityA, popup=Popup('Neighbor A', show=True)).add_to(m)
+        folium.Marker(location=self.tuple_cityB, popup=Popup('Neighbor B', show=True)).add_to(m)
+        folium.Marker(location=self.tuple_cityC, popup=Popup('Neighbor C', show=True)).add_to(m)
         m.save('map.html')
     
         webbrowser.open_new_tab('map.html')
@@ -244,8 +245,6 @@ class Triangulation:
         values_station_C = []
 
         insufficient_days_indices = []
-        print("len", len(data[0]))
-        print(data)
 
         for i in range(len(data)):
             try:
