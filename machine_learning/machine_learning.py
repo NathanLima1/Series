@@ -21,12 +21,18 @@ class MachineLearning(Toplevel):
         Button(self, text='Escolher Machine Learning', font='Arial 11 bold', fg='white', bg=fun_ap, width=30, command=self.gera_param).place(x=340, y=59)
 
     def int_float(self, value):
+        """
+        Try to return a int value, if it can't, returns a float value
+        """
         try:
             return int(value)
         except:
             return float(value)
         
     def valid_maxf(self, value):
+        """
+        Returnes the correct type of a received value
+        """
         if value.isdigit() == True:
             value = int(value)
         elif value.isalnum() == True and value.isdigit() == False:

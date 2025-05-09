@@ -16,8 +16,11 @@ class DataProcessing:
         self.neighborC = neighborC
         self.download_path = download_path
 
-    def find_columns(self, header_line, sample_line):
+    def find_columns(self, header_line:str, sample_line:str) -> int:
         # procura_colunas
+        """
+        Find the columns of preciptation, tmax and tmin
+        """
         print("Entrou dataP find_columns")
         station = (str(sample_line).split(' '))[2]
         station = station.strip("]").strip("'")
@@ -33,8 +36,11 @@ class DataProcessing:
 
         return col_prec, col_tmax, col_tmin
 
-    def get_processed_data(self):
+    def get_processed_data(self) -> None:
         # get_data_trada
+        """
+        Generates the files with the processed data for use
+        """
         print("Entrou dataP get_processed_data")
         files = [self.target, self.neighborA, self.neighborB, self.neighborC]
         output_files = [
@@ -117,7 +123,7 @@ class DataProcessing:
         self.get_coordinates()
         self.common_data_2()
 
-    def common_data(self):
+    def common_data(self) -> None:
         # dadosc
         city1, t1 = self.prepare_common_data(f"{self.download_path}/target_clean.txt")
         city2, t2 = self.prepare_common_data(f"{self.download_path}/neighborA_clean.txt")
@@ -244,6 +250,9 @@ class DataProcessing:
 
     def prepare_common_data(self, dir):
         #prepara_dadosc
+        """
+        Prepares the data in common for later use
+        """
         file = open(dir)
         prepared_data = []
 
@@ -257,7 +266,11 @@ class DataProcessing:
         file.close()
         return prepared_data, len(prepared_data)
     
-    def load_data_file(self, option):
+    def load_data_file(self, option: str) -> list:
+        """
+        Receives a string with the city selected, 
+        open the file of the selected city and returns a list with the data
+        """
         # nova retorna_arq
         print("Entrou dataP load_data_file")
         arq = open('end.txt') 
@@ -274,8 +287,6 @@ class DataProcessing:
         elif option == 'Dados comum':
             di = a[4].replace("\n", '')
             
-        
-
         
         lista = list()
         
@@ -299,7 +310,7 @@ class DataProcessing:
         
         return lista
 
-    def get_year_range(self, option):
+    def get_year_range(self, option: str):
         # get_range
         print("Entrou dataP get_year_range")
         is_common_data = False
@@ -347,7 +358,7 @@ class DataProcessing:
 
         return unique_years
 
-    def get_quantities(self):
+    def get_quantities(self) -> int:
         # get_qtd
         with open('end.txt') as file:
             paths = [line.strip() for line in file]
@@ -369,7 +380,10 @@ class DataProcessing:
 
         return total_units, target_city, neighbor_a, neighbor_b, neighbor_c
 
-    def normalize_data(self, matrix):
+    def normalize_data(self, matrix: list) -> list:
+        """
+        Function that receives a matrix of data and normalize this data
+        """
         # normalizar dados
         max_min = []
         temp_values = []
@@ -398,7 +412,10 @@ class DataProcessing:
 
         return normalized_data
 
-    def get_coordinates(self):
+    def get_coordinates(self) -> None:
+        """
+        This function retires the coordinates of the cities and write in a file
+        """
         # get_coordinates
         coordinates = []
         temp_data = []
@@ -433,14 +450,21 @@ class DataProcessing:
             for item in coordinates:
                 output_file.write(f"{item}\n")
 
-    def get_location_coordinates(self):
+    def get_location_coordinates(self) -> str:
+        """
+        Get the path of the file with the coordinates
+        """
         # get_local_cord
         with open('end.txt') as file:
             lines = file.readlines()
         path = lines[6].strip()
         return path
 
-    def get_file_path(self, option):
+    def get_file_path(self, option: str) -> str:
+        """
+        Receives a string with the option of choice and returns the path 
+        for the file of the selected city
+        """
         # retorna_end
         with open('end.txt') as file:
             lines = file.readlines()

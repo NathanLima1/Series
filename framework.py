@@ -21,7 +21,7 @@ fun_ap = '#9C444C'
 fun_alt = '#C99418'
 fun_meta_le = '#191970'
 
-class Principal(Frame):
+class Framework(Frame):
     def get_info(self, directory):  # Function that opens the folder with .csv files and returns important data
         print("Entrou Principal get_info")
         raw_data = []
